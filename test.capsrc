@@ -1,0 +1,6 @@
+sub m5, 0xabc, m6
+xor 0xff00, m6, m4
+print m4, 0, 0
+not m4, 0, m7
+slr m7, 0x4, m0xa
+print m0xa, 0, 0
