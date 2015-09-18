@@ -27,7 +27,11 @@ void sll(operation*);
 void mprint(operation*);
 void mprintchars(operation*);
 
-
+int programCounter = 0;
+void jgt(operation*);
+void jlt(operation*);
+void jeq(operation*);
+void stop(operation*);
 
 int main(int argc, char* argv[] )
 {
@@ -82,39 +86,41 @@ void readBinary(char* filename)
 			opList[counter].var2 = word;
 			counter++;
 		}
-		for(int i = 0; i < opSize; i++)
+		while(programCounter < opSize)
 		{
 			//printf("\n%x %x %x %x", opList[i].opCode, opList[i].var0, opList[i].var1, opList[i].var2);
-			switch(opList[i].opCode)
+			switch(opList[programCounter].opCode)
 			{
 				case 0x0:
-					add(&opList[i]);break;
+					add(&opList[programCounter]);break;
 				case 0x1:
-					sub(&opList[i]);break;
+					sub(&opList[programCounter]);break;
 				case 0x2:
-					or(&opList[i]);break;
+					or(&opList[programCounter]);break;
 				case 0x3:
-					and(&opList[i]);break;
-				
+					and(&opList[programCounter]);break;
                                 case 0x4:
-                                        xor(&opList[i]);break;
-				
+                                        xor(&opList[programCounter]);break;
                                 case 0x5:
-                                        not(&opList[i]);break;
-				
+                                        not(&opList[programCounter]);break;
                                 case 0x6:
-                                        slr(&opList[i]);break;
-				
+                                        slr(&opList[programCounter]);break;
                                 case 0x7:
-                                        sll(&opList[i]);break;
-				
+                                        sll(&opList[programCounter]);break;
                                 case 0x8:
-                                        mprint(&opList[i]);break;
-				
+                                        mprint(&opList[programCounter]);break;
                                 case 0x9:
-                                        mprintchars(&opList[i]);break;
-
+                                        mprintchars(&opList[programCounter]);break;
+				case 0xa:
+					jgt(&opList[programCounter]);break;
+				case 0xb:
+					jlt(&opList[programCounter]);break;
+				case 0xc:
+					jeq(&opList[programCounter]);break;
+				case 0xd:
+					programCounter = opSize+1;break;
 			}	
+			programCounter++;
 		}
 	}
 }
@@ -211,4 +217,24 @@ void mprintchars(operation* op)
 {
 	printf("%c", varRead(op->var0));
 }
-
+void jgt(operation* op)
+{
+	if(varRead(op->var0) > varRead(op->var1))
+	{
+		programCounter = varRead(op->var2);
+	}
+}
+void jlt(operation* op)
+{
+        if(varRead(op->var0) < varRead(op->var1))
+        {
+                programCounter = varRead(op->var2);
+        }
+}
+void jeq(operation* op)
+{
+        if(varRead(op->var0) == varRead(op->var1))
+        {
+                programCounter = varRead(op->var2);
+        }
+}

@@ -1,0 +1,28 @@
+Description by function:
+struct operation
+		variables opCode var0 var1 var2
+		used to store operations in simple structure
+
+main
+	checks if filename was passed prints usage otherwise
+	Initializes all memory to 0
+	calls readBinary
+
+readBinary(char* filename)
+	opens file prints error if failed
+	using while loop checks how many operations there are
+		could not find a more elegant solution than reading whole file
+	Creates a array of operations then stores the 4 values in each index
+	Runs while loop through operations list switch statement to handle each 			operation type and calls respective function
+varRead(unsigned int var)
+	checks if variable is address or constant and returns correct value
+memRead(unsigned int address)
+	checks if address is in readable memory then returns the value at address
+memWrite(unsigned int adress usigned int value)
+	checks if address is in readbale memory then stores vlaue in memory at address
+
+add .. slt(operation* op)
+	performs respective operation and stores value in memory / prints / changes
+		programCounter
+
+

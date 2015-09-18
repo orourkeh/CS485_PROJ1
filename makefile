@@ -1,6 +1,6 @@
 COMPILER=gcc -std=c99
 SOURCES=main.c
-EXEC=program
+EXEC=SVM
 
 all: clean build run
 
