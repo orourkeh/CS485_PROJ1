@@ -1,0 +1,8 @@
+Problem in binary	Solution
+10+11 		=	5
+11-10		=	1
+10 OR 11	=	3
+10 XOR 11	=	1
+~10		=	0xfffffd
+10>>1		= 	1
+10<<2		=	8
